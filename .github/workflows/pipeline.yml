@@ -1,0 +1,68 @@
+name: Main Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request_target:
+      types: 
+        - opened
+        - synchronize
+        - reopened
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip3 install -r dev-requirements.txt
+      - name: Run Lint
+        run: inv cf
+
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  release:
+    environment: pypi-main
+    needs:
+      - validate
+      - analyze
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip3 install -r dev-requirements.txt
+      - name: Run Release
+        run: |
+          git config --global user.email "bots@baileyeverts.com"
+          git config --global user.name "Semantic Release Bot"
+          semantic-release publish -v DEBUG
+        env:
+          REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}

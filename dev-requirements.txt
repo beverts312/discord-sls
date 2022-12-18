@@ -1,0 +1,9 @@
+-r requirements.txt
+black
+invoke
+boto3
+isort
+python-semantic-release
+setuptools
+twine
+wheel
