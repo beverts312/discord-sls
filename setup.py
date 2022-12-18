@@ -14,7 +14,10 @@ setup(
     description="For building serverless discord bots",
     url="https://github.com/beverts312/discord-sls",
     packages=find_packages(),
-    install_requires=["requests", "PyNaCl"],
+    install_requires=["requests", "PyNaCl", "PyYAML"],
     long_description=long_description,
     long_description_content_type="text/markdown",
+    entry_points = {
+        "console_scripts": ["discord-sls=discord_sls.cli.main:main"],
+    }
 )
