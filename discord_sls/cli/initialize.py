@@ -59,6 +59,9 @@ def create_sam_files(
 
 
 def initialize_bot(**kwargs):
+    logging.info(
+        "If you have not yet created the bot in the discord developer portal do that now"
+    )
     name = kwargs.get("name", input("Bot name: "))
     app_id = kwargs.get(
         "app_id",
