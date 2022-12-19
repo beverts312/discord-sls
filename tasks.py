@@ -1,7 +1,11 @@
 from invoke import task
 
 
-def black(c, check):
+def black(c, check, all=False):
+    if all:
+        c.run(
+            f"npx prettier --loglevel=warn {'--check' if check is True else '--write'} ."
+        )
     c.run("isort .")
     return c.run(
         f"black tasks.py discord_sls/ --line-length=79 {'--check' if check is True else ''} -v"
@@ -13,9 +17,14 @@ def format(c):
     return black(c, False)
 
 
+@task(aliases=["fa"])
+def format_all(c):
+    return black(c, False, True)
+
+
 @task(aliases=["cf", "fc"])
 def check_format(c):
-    return black(c, True)
+    return black(c, True, True)
 
 
 @task(aliases=["c"])
