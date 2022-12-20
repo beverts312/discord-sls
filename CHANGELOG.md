@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2022-12-20)
+### Fix
+* Remove templating stuff ([`7101d5f`](https://github.com/beverts312/discord-sls/commit/7101d5ff7b8cbf334b6ee58dab3a1b9124f3298e))
+
+### Documentation
+* Add setup stuff ([`f6f00eb`](https://github.com/beverts312/discord-sls/commit/f6f00eb2ecde0f3db8d3d48b008c26b8755e8ab5))
+
 ## v0.2.0 (2022-12-18)
 ### Feature
 * **cli:** Add info/init [#2] ([`0f5879d`](https://github.com/beverts312/discord-sls/commit/0f5879d8012a02309a71af5a3cc47f5ad6db9baa))
