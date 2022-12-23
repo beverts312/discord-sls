@@ -13,7 +13,7 @@ Install with pip: `pip install discord_sls`
 The library provides a decorator `@bot_handler` which can be used to decorate a lambda handler to respond to discord api requests.
 It will handle the ping-pong handshake, and will parse the request body into a python object for you to use. The decorator expects you to return [Ineraction Callback Data](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure).
 
-Discord expects a quick response to the initial request, if your bot needs longer to handle an interaction you can use the `send_command_to_queue` function to send the command to a queue for processing in another lambda (aditional decorator coming soon). The queue is determined by the `LONG_RESPONSE_QUEUE` environment variable.
+Discord expects a quick response to the initial request, if your bot needs longer to handle an interaction you can use the `send_command_to_queue` function to send the command to a queue for processing in another lambda decorated with `@deferred_response_handler`. The queue is determined by the `LONG_RESPONSE_QUEUE` environment variable.
 
 ```py
 import json
@@ -33,11 +33,9 @@ def discord_bot(command_body, send_command_to_queue):
         return {"content": "Unknown Command"}
 
 
-def long_response_handler(event, context):
-    for record in event["Records"]:
-        body = json.loads(record["body"])
-        interaction = Interaction(body)
-        interaction.edit_interaction({"content": "Hello...async"})
+@deferred_response_handler
+def long_response_handler(interaction: Interaction):
+  interaction.follow_up({"content": "Hello...async"})
 ```
 
 ### Keeping the bot warm

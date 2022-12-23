@@ -6,6 +6,8 @@ from functools import wraps
 import boto3
 from nacl.signing import VerifyKey
 
+from discord_sls.interaction import Interaction
+
 DISCORD_API_BASE = "https://discord.com/api/v10"
 logging.getLogger().setLevel(logging.INFO)
 
@@ -91,5 +93,21 @@ def bot_handler(func):
                 "data": res_data,
             },
         )
+
+    return wrapper
+
+
+def deferred_response_handler(func):
+    @wraps(func)
+    def wrapper(event, context):
+        for record in event["Records"]:
+            body = json.loads(record["body"])
+            interaction = Interaction(body)
+            try:
+                func(interaction)
+            except Exception as e:
+                logging.error(f"Unhandled exception handling: {body}")
+                logging.error(e)
+                interaction.follow_up({"content": "something went wrong"})
 
     return wrapper
