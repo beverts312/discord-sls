@@ -18,7 +18,7 @@ Discord expects a quick response to the initial request, if your bot needs longe
 ```py
 import json
 import logging
-from discord_sls import Interaction, bot_handler
+from discord_sls import Interaction, bot_handler, deferred_response_handler
 
 @bot_handler
 def discord_bot(command_body, send_command_to_queue):

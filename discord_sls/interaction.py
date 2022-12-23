@@ -33,4 +33,4 @@ class Interaction:
         self._handle_res(requests.delete(self._original_path))
 
     def follow_up(self, content):
-        self._handle_res(requests.post(self._interaction_path), json=content)
+        self._handle_res(requests.post(self._interaction_path, json=content))
