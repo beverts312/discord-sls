@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2022-12-23)
+### Feature
+* Add deffered response handler ([`3b6cd6c`](https://github.com/beverts312/discord-sls/commit/3b6cd6cc8ae2364ac5e4528a7db62e8bcc6cd1b7))
+
 ## v0.2.1 (2022-12-20)
 ### Fix
 * Remove templating stuff ([`7101d5f`](https://github.com/beverts312/discord-sls/commit/7101d5ff7b8cbf334b6ee58dab3a1b9124f3298e))
