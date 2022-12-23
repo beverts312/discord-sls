@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.1 (2022-12-23)
+### Fix
+* Dffered reaction touchup ([`e05f13f`](https://github.com/beverts312/discord-sls/commit/e05f13f91323f859d02d38f4bd73e4d43bd414e4))
+
 ## v0.3.0 (2022-12-23)
 ### Feature
 * Add deffered response handler ([`3b6cd6c`](https://github.com/beverts312/discord-sls/commit/3b6cd6cc8ae2364ac5e4528a7db62e8bcc6cd1b7))
