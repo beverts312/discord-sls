@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2022-12-25)
+### Feature
+* **cli:** Add helper for registering commands ([`56405ed`](https://github.com/beverts312/discord-sls/commit/56405ed977213f93149c436b463c33167821564f))
+
 ## v0.3.1 (2022-12-23)
 ### Fix
 * Dffered reaction touchup ([`e05f13f`](https://github.com/beverts312/discord-sls/commit/e05f13f91323f859d02d38f4bd73e4d43bd414e4))
